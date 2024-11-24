@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 from datetime import datetime
 
-from domain.exceptions.year import YearTooBigException
-from domain.values.base import BaseValueObject
+from src.dto.exceptions.year import YearTooBigException
+from src.dto.schemas.base import BaseValueObject
 
 
 @dataclass(frozen=True)

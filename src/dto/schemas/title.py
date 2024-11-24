@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
-from domain.exceptions.title import EmptyTitleException
-from domain.values.base import BaseValueObject
+from src.dto.exceptions.title import EmptyTitleException
+from src.dto.schemas.base import BaseValueObject
 
 
 @dataclass(frozen=True)

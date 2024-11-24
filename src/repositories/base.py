@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from abc import abstractmethod, ABC
 
-from domain.entities.book import Book
+from src.domain.entities.book import Book
 
 
 @dataclass
@@ -12,14 +12,15 @@ class BaseBookRepository(ABC):
         ...
 
     @abstractmethod
-    def remove_book(self, book_id: int):
+    def remove_book(self, book_id: str):
         ...
 
     @abstractmethod
-    def find_book(self, ):
+    def get_all_books(self) -> list[Book]:
         ...
 
     @abstractmethod
-    def get_books(self):
+    def get_books_by_filter(self, _filter: dict) -> Book | list[Book]:
         ...
+
 
