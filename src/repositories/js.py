@@ -1,16 +1,24 @@
 import json
-from dataclasses import dataclass
+from dataclasses import dataclass, fields
 
-from domain.exceptions.book import WrongStatusException
+from domain.entities.filters import BookFilters
 from dto.book import BookDTO
+from repositories.base import BaseBookRepository
 from repositories.exceptions.book import BookNotFoundException
-from src.domain.entities.book import Book, StatusEnum
+from src.domain.entities.book import Book
 from settings.config import JSON_FILE
 from domain.exceptions.base import ApplicationException
 
 
 @dataclass
-class JsonBookRepository():
+class JsonBookRepository(BaseBookRepository):
+    def _conventer_filter_entity_to_dict(self, _filter: BookFilters) -> dict:
+        query = dict()
+        for field in fields(_filter):
+            if getattr(_filter, field.name) is not None:
+                query[field.name] = getattr(_filter, field.name)
+
+        return query
 
     def _load_books(self) -> list[BookDTO]:
         with open(JSON_FILE, 'r', encoding='utf-8') as file:
@@ -58,17 +66,15 @@ class JsonBookRepository():
         book_entity.change_status(status)
         book_dto = BookDTO.from_entity(book_entity)
         data[found_index] = book_dto
+        self._save_books(data)
         return book_entity
 
-    def get_books(self, _filter: dict) -> list[Book]:
+    def get_books_by_filter(self, _filter: BookFilters) -> list[Book]:
         response_book_list = list()
         data = self._load_books()
+        filters = self._conventer_filter_entity_to_dict(_filter)
         for book in data:
-            if all(getattr(book, key) == value for key, value in _filter.items()):
+            if all(getattr(book, key) == value for key, value in filters.items()):
                 response_book_list.append(book.to_entity())
 
         return response_book_list
-
-
-r = JsonBookRepository()
-print(r.get_books({}))

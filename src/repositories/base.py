@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from abc import abstractmethod, ABC
 
+from domain.entities.filters import BookFilters
 from src.domain.entities.book import Book
 
 
@@ -16,11 +17,9 @@ class BaseBookRepository(ABC):
         ...
 
     @abstractmethod
-    def get_all_books(self) -> list[Book]:
+    def get_books_by_filter(self, _filter: BookFilters) -> list[Book]:
         ...
 
     @abstractmethod
-    def get_books_by_filter(self, _filter: dict) -> Book | list[Book]:
+    def update_book_status(self, book_id: str, status: str) -> Book:
         ...
-
-

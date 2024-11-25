@@ -11,6 +11,12 @@ class BookDTO:
     status: str
     oid: str
 
+    def __str__(self):
+        return f'Id: {self.oid}, Название: {self.title}, Автор: {self.author}, Год: {self.year}, Статус: {self.status}'
+
+    def __repr__(self):
+        return f'Id: {self.oid}, Название: {self.title}, Автор: {self.author}, Год: {self.year}, Статус: {self.status}'
+
     @staticmethod
     def from_entity(book: Book) -> 'BookDTO':
         return BookDTO(title=book.title,
