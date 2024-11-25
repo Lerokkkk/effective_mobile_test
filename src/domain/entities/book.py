@@ -12,6 +12,8 @@ class StatusEnum(StrEnum):
 
 @dataclass(eq=False)
 class Book:
+    """Объект книги для работы с книгой как бизнес сущностью"""
+
     title: str
 
     author: str

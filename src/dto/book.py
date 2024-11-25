@@ -5,6 +5,7 @@ from src.domain.entities.book import Book, StatusEnum
 
 @dataclass
 class BookDTO:
+    """Data Transfer Object книги для передачи между слоями приложения"""
     title: str
     author: str
     year: int

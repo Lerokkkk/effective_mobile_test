@@ -2,9 +2,10 @@ from api.exceptions.year import YearTypeException
 from api.handlers import add_book_handler, remove_book_handler, update_book_status_handler, find_all_books_handler, \
     find_book_by_filter_handler
 from api.schemas import BookInSchema, BookFiltersSchema, BookChangeStatusInSchema
-from domain.exceptions.base import ApplicationException
 from repositories.js import JsonBookRepository
 from services.js import JsonBookService
+
+"""Файл с представлениями, конвертирующий пользовательский ввод в DTO и вызывающий сервисы"""
 
 
 def add_book_view():
@@ -60,4 +61,3 @@ def find_book_by_filter_view():
         [print(i) for i in find_book_by_filter_handler(book_in_schema, service)]
     except ValueError:
         raise YearTypeException()
-

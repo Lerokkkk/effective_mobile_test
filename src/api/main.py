@@ -3,6 +3,7 @@ from domain.exceptions.base import ApplicationException
 
 
 def app():
+    """Функция - точка входа в консольное приложение"""
     while True:
         try:
             print('-' * 20)

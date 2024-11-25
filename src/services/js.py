@@ -9,6 +9,7 @@ from .base import BaseBookService
 
 @dataclass
 class JsonBookService(BaseBookService):
+    """JSON сервис работающий с JSONBookRepository"""
     repository: BaseBookRepository = JsonBookRepository
 
     def add_book(self, book: Book) -> Book:
